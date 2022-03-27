@@ -2,13 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const http = require("http");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+require("dotenv").config();
 
-dotenv.config();
+const io = require("./socket/socket.js");
 const HTTP_PORT = process.env.HTTP_PORT;
 
 const app = express();
 const httpServer = http.createServer(app);
+io.attach(httpServer);
 
 app.use(express.json());
 app.use(
